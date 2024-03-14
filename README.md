@@ -4,7 +4,7 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 
 # Contributors
 
-* [Denzel] (https://github.com/denprud)
-* [Joyce] (https://github.com/joyxe-xie)
-* [Neal] (https://github.com/nhaulsey)
-* [Rakshit] (https://github.com/RakSridhar23)
+* [Denzel](https://github.com/denprud)
+* [Joyce](https://github.com/joyxe-xie)
+* [Neal](https://github.com/nhaulsey)
+* [Rakshit](https://github.com/RakSridhar23)
