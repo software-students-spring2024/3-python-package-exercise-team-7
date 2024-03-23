@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d283e9b1bdaa8d65fa78628551bc8ac6cd4d6c2e7c9b36527cb3a895df834861"
+            "sha256": "25d8f7c6443830be44d9b9bfee9b1d0d3c8247597523a5ab4339243a33831f6c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,15 @@
         ]
     },
     "default": {
+        "build": {
+            "hashes": [
+                "sha256:8ed0851ee76e6e38adce47e4bee3b51c771d86c64cf578d0c2245567ee200e73",
+                "sha256:8eea65bb45b1aac2e734ba2cc8dad3a6d97d97901a395bd0ed3e7b46953d2a31"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.7'",
+            "version": "==1.1.1"
+        },
         "certifi": {
             "hashes": [
                 "sha256:0569859f95fc761b18b45ef421b1290a0f65f147e92a1e5eb3e635f9a5e4e66f",
@@ -125,7 +134,7 @@
                 "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
                 "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
             ],
-            "markers": "sys_platform == 'win32'",
+            "markers": "os_name == 'nt'",
             "version": "==0.4.6"
         },
         "idna": {
@@ -159,6 +168,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==1.4.0"
+        },
+        "pyproject-hooks": {
+            "hashes": [
+                "sha256:283c11acd6b928d2f6a7c73fa0d01cb2bdc5f07c57a2eeb6e83d5e56b97976f8",
+                "sha256:f271b298b97f5955d53fb12b72c1fb1948c22c1a6b70b315c54cedaca0264ef5"
+            ],
+            "markers": "python_version >= '3.7'",
+            "version": "==1.0.0"
         },
         "pytest": {
             "hashes": [
@@ -340,7 +357,7 @@
                 "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
                 "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
             ],
-            "markers": "sys_platform == 'win32'",
+            "markers": "os_name == 'nt'",
             "version": "==0.4.6"
         },
         "docutils": {
