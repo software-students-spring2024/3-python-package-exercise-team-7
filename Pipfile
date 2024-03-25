@@ -9,7 +9,7 @@ requests = "*"
 spotipy = "*"
 pytest = "*"
 build = "*"
-
+pytify = {editable = true, path = "."}
 [dev-packages]
 pytest = "*"
 build = "*"
