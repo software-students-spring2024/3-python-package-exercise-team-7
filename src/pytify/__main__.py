@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from client import get_artist_id, authenticate
+from client import get_artist_id, get_track_id, authenticate
 
 load_dotenv()
 
@@ -14,7 +14,8 @@ AUTH_URL = "https://accounts.spotify.com/api/token"
 BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
-   get_top_ten("Nas")
+   get_top_ten("Nas.")
+   analyze("Hello Lionel")
 
 def get_top_ten(artist):
     access_token = authenticate()
@@ -43,7 +44,19 @@ def analyze(song):
     'Authorization': 'Bearer {token}'.format(token=access_token)
     }
 
-    
+    song_id = get_track_id(headers, song)
+    #print(song_id)
+    response = requests.get(BASE_URL + 'tracks/' + song_id, headers=headers)
+    response_data = response.json()
+    print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
+
+    #Use the song's Spotify ID to get their audio features
+    features_response = requests.get(BASE_URL + 'audio-features/' + song_id, headers=headers)
+    features_response_data = features_response.json()
+    print(features_response_data)
+
+
+
     
 
 if __name__ == "__main__":
