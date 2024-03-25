@@ -8,7 +8,7 @@ python-dotenv = "*"
 requests = "*"
 spotipy = "*"
 pytest = "*"
-pytify = {editable = true, path = "."}
+pytify = {file = ".", editable = true}
 
 [dev-packages]
 pytest = "*"
