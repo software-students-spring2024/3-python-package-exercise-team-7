@@ -14,7 +14,7 @@ AUTH_URL = "https://accounts.spotify.com/api/token"
 BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
-   get_top_ten("J Cole")
+   get_top_ten("Nas")
 
 def get_top_ten(artist):
     access_token = authenticate()
@@ -34,6 +34,17 @@ def get_top_ten(artist):
     # Print the names of the artist's top 10 tracks
     for i, track in enumerate(response_data['tracks'][:10]):
         print(f"{i+1}. {track['name']}")
+
+
+def analyze(song):
+    access_token = authenticate()
+
+    headers = {
+    'Authorization': 'Bearer {token}'.format(token=access_token)
+    }
+
+    
+    
 
 if __name__ == "__main__":
     main()

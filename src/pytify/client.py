@@ -21,6 +21,14 @@ def get_artist_id(headers,artist):
 
     return artist_id
 
+def get_track_id(headers, song):
+
+    response = requests.get(BASE_URL + f'search?q=track:{str.lower(song)}&type=track',headers=headers)
+    response_data = response.json()
+    # Get the song's Spotify ID
+    song_id = response_data['tracks']['items'][0]['id']
+    return song_id
+
 def authenticate():
 
     load_dotenv()

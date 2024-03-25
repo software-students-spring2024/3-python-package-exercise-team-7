@@ -1,7 +1,7 @@
 import pytest
 import os
 from dotenv import load_dotenv
-from src.pytify.client import get_artist_id, authenticate
+from pytify import get_artist_id, authenticate
 
 
 
