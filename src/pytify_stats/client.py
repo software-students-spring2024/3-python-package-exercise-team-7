@@ -68,6 +68,7 @@ class Client:
             retArray.append(track['name'])
             #print(f"{i+1}. {track['name']}")
 
+        
         return retArray
 
     def get_album(self, album):
