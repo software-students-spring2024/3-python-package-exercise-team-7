@@ -41,7 +41,8 @@ class Client:
     
 
     def get_top_ten(self, artist):
-        retArray = []
+        # retArray = []
+        retStr = ""
 
         access_token = self.authenticate()
 
@@ -65,11 +66,13 @@ class Client:
 
         # Print the names of the artist's top 10 tracks
         for i, track in enumerate(response_data['tracks'][:10]):
-            retArray.append(track['name'])
+            # retArray.append(track['name'])
+            retStr = retStr + f"{i+1}. {track['name']}\n"
             #print(f"{i+1}. {track['name']}")
 
         
-        return retArray
+        # print(retArray)
+        return retStr
 
     def get_album(self, album):
         retArray = []
@@ -98,6 +101,7 @@ class Client:
             retArray.append({'name' : track['name'], "milliseconds": track['duration_ms'], "id": track['duration_ms']})
             #print(f"{i+1}. {track['name']}")
 
+        # print(retArray)
         return retArray
 
     def get_song(self, song):
@@ -139,7 +143,13 @@ class Client:
         #Use the song's Spotify ID to get their audio features
         features_response = requests.get(self.BASE_URL + 'audio-features/' + song_id, headers=headers)
         features_response_data = features_response.json()
-        print(features_response_data)
+
+        feature_list = ""
+        for feature in features_response_data:
+            feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
+
+        # print(feature_list)
+        return feature_list
 
 
 
