@@ -42,4 +42,13 @@ class Tests:
         assert isinstance(artist_id, str)
 
         
-    
+    def test_get_track_id(self):
+        access_token = authenticate()
+
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        track_id = get_track_id(headers, "Hello")
+
+        assert isinstance(track_id, str)
