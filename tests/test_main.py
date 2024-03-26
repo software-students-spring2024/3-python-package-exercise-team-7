@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
-from pytify.client import get_artist_id, get_track_id, authenticate
+from pytify.client import get_artist_id, authenticate
 
 
 
