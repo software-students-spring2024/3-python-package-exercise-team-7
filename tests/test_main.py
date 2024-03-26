@@ -86,5 +86,5 @@ class Tests:
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
         analysis = analyze("dcinneoenndsiweinwo")
-        assert analyze = 
+        assert analysis == "Invalid track ID"
 

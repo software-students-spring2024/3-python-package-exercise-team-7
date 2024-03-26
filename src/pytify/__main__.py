@@ -3,7 +3,7 @@ import os
 # import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
-from client import get_artist_id, get_track_id, authenticate
+from pytify.client import get_artist_id, get_track_id, authenticate
 
 load_dotenv()
 
@@ -17,7 +17,7 @@ BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
    get_top_ten("J Cole")
-   analyze("No Role Modelz")
+   analyze("dcinneoenndsiweinwo")
 
 def get_top_ten(artist):
     access_token = authenticate()
