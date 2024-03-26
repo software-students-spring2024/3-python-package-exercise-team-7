@@ -26,6 +26,7 @@ def get_artist_id(headers,artist):
 
 load_dotenv()
 
+
     # Spotify app's client ID and client secret
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
