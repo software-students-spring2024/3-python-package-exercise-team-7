@@ -16,6 +16,8 @@ def main():
    print(album)
    track = spy.get_song("Wet Dreamz")
    print(track)
+   analysis = spy.analyze("Hello Lionel")
+   print(analysis)
 
 
 if __name__ == "__main__":
