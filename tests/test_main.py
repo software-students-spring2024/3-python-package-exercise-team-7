@@ -16,8 +16,10 @@ class Tests:
     
     def test_get_env(self):
         load_dotenv()
-        CLIENT_ID = os.getenv("CLIENT_ID")
-        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        CLIENT_ID = os.getenv('CLIENT_ID')
+        CLIENT_SECRET =  os.getenv('CLIENT_SECRET')
+        
+
         assert isinstance(CLIENT_ID, str)
         assert len(CLIENT_ID) > 0
         assert isinstance(CLIENT_SECRET, str)

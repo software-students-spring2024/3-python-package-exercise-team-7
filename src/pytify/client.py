@@ -30,6 +30,8 @@ load_dotenv()
     # Spotify app's client ID and client secret
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+
+
     
 def authenticate():
     auth_string = CLIENT_ID + ":" + CLIENT_SECRET
