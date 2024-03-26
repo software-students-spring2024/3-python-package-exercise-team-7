@@ -9,6 +9,8 @@ requests = "*"
 spotipy = "*"
 pytest = "*"
 pytify = {file = ".", editable = true}
+build = "*"
+
 
 [dev-packages]
 pytest = "*"
