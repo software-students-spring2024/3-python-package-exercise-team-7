@@ -51,6 +51,23 @@ print(song)
 
 Put your client_id and client secret you've recieved from Spotify in place of the parameters of the Client class
 
+# How to Contribute
+
+1. Download the source code and open it on a code editor
+
+2. Install pipenv and install the following:
+
+pipenv install requests
+pipenv install python-dotenv
+pipenv install pytest
+
+3. Make changes and run unit test for it
+
+4. Push changes onto a new branch on GitHub
+
+5. Make a pull request and  wait for a review. If accpeted, the branches will be merged and the new code will be uploaded to PyPi
+
+
 # Contributors
 
 * [Denzel](https://github.com/denprud)
