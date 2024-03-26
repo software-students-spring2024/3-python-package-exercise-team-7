@@ -15,7 +15,7 @@ BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
    get_top_ten("J Cole")
-   analyze("No Role Modelz")
+   analyze("Hello")
 
 def get_top_ten(artist):
     access_token = authenticate()
