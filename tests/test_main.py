@@ -79,3 +79,12 @@ class Tests:
         analysis = analyze("Hello")
         assert isinstance(analysis, str)
 
+    def test_analyze_dne(self):
+        access_token = authenticate()
+
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        analysis = analyze("dcinneoenndsiweinwo")
+        assert analyze = 
+

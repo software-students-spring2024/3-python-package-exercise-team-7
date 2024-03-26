@@ -48,7 +48,8 @@ def analyze(song):
     }
 
     if get_track_id(headers, song) == "No such track ID found":
-        return print("Invalid track ID")
+        print("Invalid track ID")
+        return "Invalid track ID"
     else:
         song_id = get_track_id(headers, song)
         #print(song_id)
