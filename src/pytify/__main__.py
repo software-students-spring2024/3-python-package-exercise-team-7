@@ -15,7 +15,7 @@ BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
    get_top_ten("J Cole")
-   analyze("Hello")
+   analyze("")
 
 def get_top_ten(artist):
     access_token = authenticate()
@@ -45,18 +45,21 @@ def analyze(song):
     'Authorization': 'Bearer {token}'.format(token=access_token)
     }
 
-    song_id = get_track_id(headers, song)
-    #print(song_id)
-    response = requests.get(BASE_URL + 'tracks/' + song_id, headers=headers)
-    response_data = response.json()
-    print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
+    if get_track_id(headers, song) == "No such track ID found":
+        return print("Invalid track ID")
+    else:
+        song_id = get_track_id(headers, song)
+        #print(song_id)
+        response = requests.get(BASE_URL + 'tracks/' + song_id, headers=headers)
+        response_data = response.json()
+        print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
 
-    #Use the song's Spotify ID to get their audio features
-    features_response = requests.get(BASE_URL + 'audio-features/' + song_id, headers=headers)
-    features_response_data = features_response.json()
-    # print(features_response_data)
-    for feature in features_response_data:
-        print(f"{feature}: {features_response_data[feature]}")
+        #Use the song's Spotify ID to get their audio features
+        features_response = requests.get(BASE_URL + 'audio-features/' + song_id, headers=headers)
+        features_response_data = features_response.json()
+        # print(features_response_data)
+        for feature in features_response_data:
+            print(f"{feature}: {features_response_data[feature]}")
 
 
 
