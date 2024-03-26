@@ -65,9 +65,14 @@ class Tests:
 
         assert track_id == "No such track ID found"
 
-    # def test_get_track_id_no_headers(self):
-    #     track_id = get_track_id("Hello")
-    #     assert track_id
+    def test_get_track_id_no_search(self):
+        access_token = authenticate()
+
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        track_id = get_track_id(headers, "")
+        assert track_id == "Please enter the name of a song."
 
     def test_analyze(self):
         access_token = authenticate()
@@ -87,4 +92,13 @@ class Tests:
         }
         analysis = analyze("dcinneoenndsiweinwo")
         assert analysis == "Invalid track ID"
+
+    def test_analyze_no_search(self):
+        access_token = authenticate()
+
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        analysis = analyze("")
+        assert analysis == "Please enter the name of a song."
 

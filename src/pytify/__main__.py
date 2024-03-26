@@ -17,7 +17,7 @@ BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
    get_top_ten("J Cole")
-   analyze("dcinneoenndsiweinwo")
+   analyze("")
 
 def get_top_ten(artist):
     access_token = authenticate()
@@ -50,6 +50,9 @@ def analyze(song):
     if get_track_id(headers, song) == "No such track ID found":
         print("Invalid track ID")
         return "Invalid track ID"
+    elif song == "":
+        print("Please enter the name of a song.")
+        return "Please enter the name of a song."
     else:
         song_id = get_track_id(headers, song)
         #print(song_id)

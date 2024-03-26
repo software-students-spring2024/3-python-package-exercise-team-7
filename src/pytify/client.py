@@ -30,6 +30,9 @@ def get_track_id(headers, song):
     # Get the song's Spotify ID
     if response_data['tracks']['items'] == []:
         return "No such track ID found"
+    elif song == "":
+        # print("Please enter the name of a song.")
+        return "Please enter the name of a song."
     else: song_id = response_data['tracks']['items'][0]['id']
     return song_id
 
