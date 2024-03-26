@@ -10,6 +10,8 @@ spotipy = "*"
 pytest = "*"
 build = "*"
 pytify = {editable = true, path = "."}
+urllib3 = "==1.26.7"
+
 [dev-packages]
 pytest = "*"
 build = "*"

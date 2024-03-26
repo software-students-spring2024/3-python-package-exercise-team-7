@@ -24,16 +24,16 @@ class Tests:
 
 
     def test_get_spofify_auth(self):
-        access_token = authenticate()
-        assert isinstance(access_token, str)
+        
+        token = authenticate()
+        assert isinstance(token, str)
 
     
     def test_get_artist_id(self):
-        access_token = authenticate()
+        token = authenticate()
 
         headers = {
-        'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
+        "Authorization": "Bearer " + token}
 
         artist_id = get_artist_id(headers, "J Cole")
 
