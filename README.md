@@ -4,7 +4,52 @@
 
 An exercise to create a Python package, build it, test it, distribute it, and use it. See [instructions](./instructions.md) for details.
 
+# Package Description
 
+The package pytify_stats is a Python package that runs basic stats gathered from the Spotify API.  It can currently get stats such as artist information, track information, and an artist's top ten tracks.
+
+
+# How to Use
+
+Here is how to set it up:
+
+
+1. Run this code in the terminal:
+
+```
+pipenv install -i https://test.pypi.org/simple/ pytify-stats==0.0.3.3
+```
+
+2. Import it in your python file:
+
+```
+from pytify_stats import client
+```
+
+3. Create a new account or log in [here](https://developers.spotify.com/). Go to the dashboard, create an app and retrieve your new ID and SECRET
+
+
+4. Authenicate using the Client class
+
+The example below demonstrates how to do this:
+
+```
+from pytify_stats import client
+
+spy = client.Client(CLIENT_ID, CLIENT_SECRET)
+
+album = spy.get_album("KOD")
+
+top_ten = spy.get_top_ten("J. Cole")
+
+song = spy.get_song("She Knows")
+
+print(album)
+print(top_ten)
+print(song)
+```
+
+Put your client_id and client secret you've recieved from Spotify in place of the parameters of the Client class
 
 # Contributors
 
