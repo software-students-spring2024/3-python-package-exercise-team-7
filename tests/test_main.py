@@ -1,9 +1,7 @@
 import pytest
 import os
 from dotenv import load_dotenv
-from src.pytify.client import get_artist_id, authenticate
-
-
+from src.pytify_stats.client import Client
 
 class Tests:
 
@@ -24,19 +22,25 @@ class Tests:
 
 
     def test_get_spofify_auth(self):
-        access_token = authenticate()
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
         assert isinstance(access_token, str)
+        assert len(access_token) > 0
 
     
     def test_get_artist_id(self):
-        access_token = authenticate()
-
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
         headers = {
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
-
-        artist_id = get_artist_id(headers, "J Cole")
-
+        artist_id = spy.search(headers, "J Cole", "artist")
         assert isinstance(artist_id, str)
 
         
