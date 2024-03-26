@@ -1,8 +1,10 @@
 import requests
 import os
-# import sys
+import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 from pytify.client import get_artist_id, get_track_id, authenticate
 
 load_dotenv()
