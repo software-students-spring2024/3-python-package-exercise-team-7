@@ -1,5 +1,7 @@
 import requests
 import os
+# import sys
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
 from client import get_artist_id, get_track_id, authenticate
 
@@ -15,7 +17,7 @@ BASE_URL = "https://api.spotify.com/v1/"
 
 def main():
    get_top_ten("J Cole")
-   analyze("")
+   analyze("No Role Modelz")
 
 def get_top_ten(artist):
     access_token = authenticate()
@@ -52,14 +54,21 @@ def analyze(song):
         #print(song_id)
         response = requests.get(BASE_URL + 'tracks/' + song_id, headers=headers)
         response_data = response.json()
+        # print(response_data["artists"])
         print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
 
         #Use the song's Spotify ID to get their audio features
         features_response = requests.get(BASE_URL + 'audio-features/' + song_id, headers=headers)
         features_response_data = features_response.json()
         # print(features_response_data)
+
+        feature_list = ''
         for feature in features_response_data:
-            print(f"{feature}: {features_response_data[feature]}")
+            # print(f"{feature}: {features_response_data[feature]}")
+            feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
+        print(feature_list)
+        return feature_list
+
 
 
 

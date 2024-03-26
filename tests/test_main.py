@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
 from pytify.client import get_artist_id, get_track_id, authenticate
-# from pytify.__main__ import analyze
+from pytify.__main__ import analyze
 
 
 
@@ -65,13 +65,17 @@ class Tests:
 
         assert track_id == "No such track ID found"
 
-    # def test_analyze(self):
-    #     access_token = authenticate()
+    # def test_get_track_id_no_headers(self):
+    #     track_id = get_track_id("Hello")
+    #     assert track_id
 
-    #     headers = {
-    #     'Authorization': 'Bearer {token}'.format(token=access_token)
-    #     }
+    def test_analyze(self):
+        access_token = authenticate()
 
-    #     analysis = analyze("Hello")
-    #     assert isinstance(analysis, str)
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        analysis = analyze("Hello")
+        assert isinstance(analysis, str)
 
