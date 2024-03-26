@@ -27,11 +27,11 @@ def get_artist_id(headers,artist):
 load_dotenv()
 
     # Spotify app's client ID and client secret
-client_id = os.getenv("CLIENT_ID")
-client_secret =  os.getenv("CLIENT_SECRET")
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
     
 def authenticate():
-    auth_string = client_id + ":" + client_secret
+    auth_string = CLIENT_ID + ":" + CLIENT_SECRET
     auth_bytes = auth_string.encode ("utf-8")
     auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
     
