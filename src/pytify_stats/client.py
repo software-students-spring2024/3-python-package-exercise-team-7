@@ -215,7 +215,7 @@ class Client:
             return artist_data
 
         else:
-            print("Failed to get artist's informstion: {response.status_code}")
+            print("Failed to get artist's information: {response.status_code}")
             return None
         
     def get_artist_albums(self, artist):
