@@ -123,3 +123,13 @@ class Tests:
         analysis = spy.analyze("")
         assert analysis == "Please enter the name of a song."
 
+    def test_search_for_artist(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+
+        artist_name = "J. Cole"
+        artist_data = spy.search_for_artist(artist_name)
+        assert artist_data is not None, "No artst data"
+        assert artist_data['name'] == artist_name, "Artist name is incorrect" 
