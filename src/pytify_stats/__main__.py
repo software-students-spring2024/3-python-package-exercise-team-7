@@ -10,7 +10,7 @@ CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
 
 def main():
    spy = Client(CLIENT_ID,CLIENT_SECRET)
-   artist_data = spy.search_for_artist("J. Cole")
+   artist_data = spy.search_for_artist("J Cole")
    print(artist_data)
    top_ten = spy.get_top_ten("J Cole")
    print(top_ten)

@@ -217,13 +217,19 @@ class Client:
 
         response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
 
+        if artist_name == "":
+            return "Invalid artist name."
+        # print(response.json()['artists']['items'])
+        if response.json()['artists']['items'] == []:
+            return "Artist not found."
+        
         if response.status_code == 200:
             artist_data = response.json()['artists']['items'][0]
             return artist_data
-
         else:
             print(f"Failed to get artist's information: {response.status_code}")
-            return None
+            return "Artist not found."
+        
         
     def get_artist_albums(self, artist):
         """
