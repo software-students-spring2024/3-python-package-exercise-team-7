@@ -198,5 +198,17 @@ class Tests:
         topten = spy.get_top_ten("J Cole")
         assert isinstance(topten, str)
 
+    def test_get_top_ten_error(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        topten = spy.get_top_ten("erjjroijejeoeoririj")
+        assert topten == f"The artist request was invalid, error:{self.response.status_code}"
+
     
 
