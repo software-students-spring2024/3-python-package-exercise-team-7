@@ -131,5 +131,5 @@ class Tests:
 
         artist_name = "J. Cole"
         artist_data = spy.search_for_artist(artist_name)
-        assert artist_data is not None, "No artst data"
+        assert artist_data is not None, "No artist data"
         assert artist_data['name'] == artist_name, "Artist name is incorrect" 
