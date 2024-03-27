@@ -33,7 +33,7 @@ class Tests:
         assert len(access_token) > 0
 
     
-    def test_get_artist_id(self):
+    def test_search_get_artist_id(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
@@ -44,6 +44,31 @@ class Tests:
         }
         artist_id = spy.search(headers, "J Cole", "artist")
         assert isinstance(artist_id, str)
+
+    def test_search_get_track_id(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        artist_id = spy.search(headers, "She Knows", "track")
+        assert isinstance(artist_id, str)
+
+    def test_search_get_album_id(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        artist_id = spy.search(headers, "2014 Forest", "album")
+        assert isinstance(artist_id, str)
+
 
         
     def test_get_song(self):
