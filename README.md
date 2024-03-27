@@ -11,49 +11,52 @@ The package pytify_stats is a Python package that runs basic stats gathered from
 # Function Documentation
 
 def authenticate(self):
-        """
+
         Authenticates the Spotify user to be able to use this package.
-        Returns: access_token = Token that allows you to access the Spotify data.
-        """
+        Return: access_token = Token that allows you to access the Spotify data.
+
+
 def search(self, headers,name,keyword):
-        """
+        
         Searches the Spotify database for the queried item 
         Inputs: headers = Headers for the HTTP response, name = the name of the item you want to search, keyword = the type of item.
-        Returns: artist_id = the id of the item you are looking for
-        """
+        Return: artist_id = the id of the item you are looking for
+        
+
 def get_top_ten(self, artist):
-        """
+        
         Retrieves the top ten songs of an artist.
         Input: artist = The artist you are searching for
         Return: retStr = the string that contains an enumerated list of the artist's top 10 songs.
-        """
+        
+
 def get_song(self, song):
-        """
+        
         Retrives the song from the query.
         Input: song = The song to look for.
-        Returns: An array containing the name of the song and its length in milliseconds.
-        """
+        Return: An array containing the name of the song and its length in milliseconds.
+        
+
 def analyze(self, song):
-        """
+        
         Returns an analysis of a song and its key information.
         Input: song = The song to be analyzed.
         Return: feature_list = The list of features, such as key, tempo, etc. that the song contains.'
-        """
-def search_for_artist(self, artist_name):
-        """
-            Search for an artist by name.
-             Args:
-            -artist_name (str): the name of the artist to search for.
-            Returns:
-            -dict: About the artist.
+        
 
-        """  
+def search_for_artist(self, artist_name):
+        
+        Search for an artist by name.
+        Input: artist_name = the name of the artist to search for.
+        Return: dict = About the artist.
+          
+
 def get_artist_albums(self, artist):
-        """
+        
         Retrieve the albums of a given artist.
         Input: artist = The artist to search for.
         Return: album_names = The list of albums the artist has released.
-        """
+        
 
 # How to Use
 
