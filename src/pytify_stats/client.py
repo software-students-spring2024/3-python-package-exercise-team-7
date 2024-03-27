@@ -134,7 +134,7 @@ class Client:
         # Error handling
         if response.status_code != 200:
             print(f"The song request was invalid, error:{response.status_code}")
-            return "No such track ID found"
+            return "No such track ID found."
         elif song == "":
             return "Please enter the name of a song."
         
@@ -170,7 +170,7 @@ class Client:
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
 
-        if self.get_song(song) == "No such track ID found":
+        if self.get_song(song) == "No such track ID found.":
             # print("Invalid track ID")
             return "Invalid track ID"
         elif song == "":

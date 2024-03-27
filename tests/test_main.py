@@ -97,7 +97,7 @@ class Tests:
 
         song = spy.get_song("nkewfnnanfsdikesd")
 
-        assert song == "No such track ID found"
+        assert song == "No such track ID found."
 
     def test_get_song_no_search(self):
         load_dotenv()
