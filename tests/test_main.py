@@ -46,4 +46,80 @@ class Tests:
         assert isinstance(artist_id, str)
 
         
-    
+    def test_get_track_id(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        track_id = spy.get_track_id("Hello")
+
+        assert isinstance(track_id, str)
+
+    def test_get_track_id_dne(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        track_id = spy.get_track_id("nkewfnnanfsdikesd")
+
+        assert track_id == "No such track ID found"
+
+    def test_get_track_id_no_search(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        track_id = spy.get_track_id("")
+        assert track_id == "Please enter the name of a song."
+
+    def test_analyze(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        analysis = spy.analyze("Hello")
+        assert isinstance(analysis, str)
+
+    def test_analyze_dne(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        analysis = spy.analyze("dcinneoenndsiweinwo")
+        assert analysis == "Invalid track ID"
+
+    def test_analyze_no_search(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        analysis = spy.analyze("")
+        assert analysis == "Please enter the name of a song."
+

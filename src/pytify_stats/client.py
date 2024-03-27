@@ -127,32 +127,77 @@ class Client:
 
         return [response_data['name'],response_data['duration_ms']]
     
-    def analyze(self,song):
+    def get_track_id(self, song):
+        access_token = self.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        response = requests.get(self.BASE_URL + f'search?q=track:{str.lower(song)}&type=track',headers=headers)
+        response_data = response.json()
+        # print(response_data['tracks']['items'])
+        # Get the song's Spotify ID
+        if response_data['tracks']['items'] == []:
+            return "No such track ID found"
+        elif song == "":
+            # print("Please enter the name of a song.")
+            return "Please enter the name of a song."
+        else: song_id = response_data['tracks']['items'][0]['id']
+        return song_id
+    
+    # def analyze(self,song):
+    #     access_token = self.authenticate()
+
+    #     headers = {
+    #     'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
+
+    #     song_id = self.search(headers, song, "track")
+    #     #print(song_id)
+    #     response = requests.get(self.BASE_URL + 'tracks/' + song_id, headers=headers)
+    #     response_data = response.json()
+    #     print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
+
+    #     #Use the song's Spotify ID to get their audio features
+    #     features_response = requests.get(self.BASE_URL + 'audio-features/' + song_id, headers=headers)
+    #     features_response_data = features_response.json()
+
+    #     feature_list = ""
+    #     for feature in features_response_data:
+    #         feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
+
+    #     # print(feature_list)
+    #     return feature_list
+    
+
+    def analyze(self, song):
         access_token = self.authenticate()
 
         headers = {
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
 
-        song_id = self.search(headers, song, "track")
-        #print(song_id)
-        response = requests.get(self.BASE_URL + 'tracks/' + song_id, headers=headers)
-        response_data = response.json()
-        print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
+        if self.get_track_id(song) == "No such track ID found":
+            # print("Invalid track ID")
+            return "Invalid track ID"
+        elif song == "":
+            # print("Please enter the name of a song.")
+            return "Please enter the name of a song."
+        else:
+            song_id = self.get_track_id(song)
+            #print(song_id)
+            response = requests.get(self.BASE_URL + 'tracks/' + song_id, headers=headers)
+            response_data = response.json()
+            # print(response_data["artists"])
+            print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
 
-        #Use the song's Spotify ID to get their audio features
-        features_response = requests.get(self.BASE_URL + 'audio-features/' + song_id, headers=headers)
-        features_response_data = features_response.json()
+            #Use the song's Spotify ID to get their audio features
+            features_response = requests.get(self.BASE_URL + 'audio-features/' + song_id, headers=headers)
+            features_response_data = features_response.json()
+            # print(features_response_data)
 
-        feature_list = ""
-        for feature in features_response_data:
-            feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
-
-        # print(feature_list)
-        return feature_list
-
-
-
-        
-
-
+            feature_list = ''
+            for feature in features_response_data:
+                # print(f"{feature}: {features_response_data[feature]}")
+                feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
+            # print(feature_list)
+            return feature_list
