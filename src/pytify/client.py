@@ -18,9 +18,11 @@ def get_artist_id(headers,artist):
     response_data = response.json()
     
     # Get the artist's Spotify ID
-    artist_id = response_data['artists']['items'][0]['id']
-
-    return artist_id
+    if 'artists' in response_data and 'items' in response_data['artists'] and response_data['artists']['items']:
+        artist_id = response_data['artists']['items'][0]['id']
+        return artist_id
+    else:
+        return None
     
 def authenticate():
 

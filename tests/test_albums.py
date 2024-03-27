@@ -6,9 +6,8 @@ from src.Pytify.client import get_artist_id, authenticate
 
 
 
-
 class Tests:
-    def test_get_artist_albums(self):
+    def test_result_format(self):
         artist = "wallows" 
         albums = get_artist_albums(artist)
 
@@ -25,4 +24,24 @@ class Tests:
                 assert isinstance(album, str)
                 assert len(album) > 0
 
-   
+    def test_correct_info(self):
+        # Call a successful response with albums
+        artist = 'wallows'
+        
+        # Call the function
+        albums = get_artist_albums(artist)
+
+        # Check with correct information
+        assert albums == ['Tell Me That It’s Over', 'Nothing Happens']
+    
+    def test_invalid_artist(self):
+        # Call a response with no artists found
+        artist = 'nonexist_artist_name_1234567'
+        
+        # Call the function
+        albums = get_artist_albums(artist)
+        
+        # Check if album list is empty
+        assert albums == []
+
+    
