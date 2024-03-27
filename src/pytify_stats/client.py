@@ -20,6 +20,11 @@ class Client:
         # Convert the response to JSON
         auth_response_data = auth_response.json()
 
+        if(self.client_id == ""):
+            return "Invalid ID"
+        if(self.client_secret == ""):
+            return "Invalid secret"
+
        
         #Save the access token
         access_token = auth_response_data['access_token']
