@@ -8,6 +8,9 @@ An exercise to create a Python package, build it, test it, distribute it, and us
 
 The package pytify_stats is a Python package that runs basic stats gathered from the Spotify API.  It can currently get stats such as artist information, track information, and an artist's top ten tracks.
 
+# Function Documentation
+
+
 
 # How to Use
 
