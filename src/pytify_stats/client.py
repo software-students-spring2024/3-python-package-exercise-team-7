@@ -65,8 +65,12 @@ class Client:
 
         # Error handling
         if response.status_code != 200:
-            print(f"The artist request was invalid, error:{response.status_code}")
-            return
+            return (f"The artist request was invalid, error:{response.status_code}")
+            # return
+        elif self.artist == "":
+            return "Please enter an artist query."
+
+
         
 
         # Convert the response to JSON

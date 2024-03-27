@@ -185,3 +185,18 @@ class Tests:
         
         # Check if album list is empty
         assert albums == []
+
+    def test_get_top_ten(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        topten = spy.get_top_ten("J Cole")
+        assert isinstance(topten, str)
+
+    
+
