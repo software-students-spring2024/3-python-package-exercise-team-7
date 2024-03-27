@@ -135,6 +135,9 @@ class Client:
         if response.status_code != 200:
             print(f"The song request was invalid, error:{response.status_code}")
             return "No such track ID found"
+        elif song == "":
+            return "Please enter the name of a song."
+        
 
         # Convert the response to JSON
         response_data = response.json()    

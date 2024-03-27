@@ -46,7 +46,7 @@ class Tests:
         assert isinstance(artist_id, str)
 
         
-    def test_get_track_id(self):
+    def test_get_song(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
@@ -56,11 +56,11 @@ class Tests:
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
 
-        track_id = spy.get_track_id("Hello")
+        song = spy.get_song("Hello")
 
-        assert isinstance(track_id, str)
+        assert isinstance(song, list)
 
-    def test_get_track_id_dne(self):
+    def test_get_song_dne(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
@@ -70,11 +70,11 @@ class Tests:
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
 
-        track_id = spy.get_track_id("nkewfnnanfsdikesd")
+        song = spy.get_song("nkewfnnanfsdikesd")
 
-        assert track_id == "No such track ID found"
+        assert song == "No such track ID found"
 
-    def test_get_track_id_no_search(self):
+    def test_get_song_no_search(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
@@ -83,8 +83,8 @@ class Tests:
         headers = {
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
-        track_id = spy.get_track_id("")
-        assert track_id == "Please enter the name of a song."
+        song = spy.get_song("")
+        assert song == "Please enter the name of a song."
 
     def test_analyze(self):
         load_dotenv()
