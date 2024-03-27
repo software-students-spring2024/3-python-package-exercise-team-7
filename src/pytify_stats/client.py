@@ -10,6 +10,10 @@ class Client:
         self.client_secret = client_secret
 
     def authenticate(self):
+        """
+        Authenticates the Spotify user to be able to use this package.
+        Returns: access_token = Token that allows you to access the Spotify data.
+        """
         # Request an access token
         auth_response = requests.post(self.AUTH_URL, data={
             'grant_type': 'client_credentials',
@@ -20,6 +24,11 @@ class Client:
         # Convert the response to JSON
         auth_response_data = auth_response.json()
 
+        if(self.client_id == ""):
+            return "Invalid ID"
+        if(self.client_secret == ""):
+            return "Invalid secret"
+
        
         #Save the access token
         access_token = auth_response_data['access_token']
@@ -27,6 +36,11 @@ class Client:
         return access_token
             
     def search(self, headers,name,keyword):
+        """
+        Searches the Spotify database for the queried item 
+        Inputs: headers = Headers for the HTTP response, name = the name of the item you want to search, keyword = the type of item.
+        Returns: artist_id = the id of the item you are looking for
+        """
 
         response = requests.get(self.BASE_URL + f'search?q={keyword}:{str.lower(name)}&type={keyword}', headers=headers)
 
@@ -39,14 +53,19 @@ class Client:
 
         # Get the artist's Spotify ID
         if plural in response_data and 'items' in response_data[plural] and response_data[plural]['items']:
-            artist_id = response_data[plural]['items'][0]['id']
-            return artist_id
+            item_id = response_data[plural]['items'][0]['id']
+            return item_id
         else:
             return ""
 
         
     
     def get_top_ten(self, artist):
+        """
+        Retrieves the top ten songs of an artist.
+        Input: artist = The artist you are searching for
+        Return: retStr = the string that contains an enumerated list of the artist's top 10 songs.
+        """
         # retArray = []
         retStr = ""
 
@@ -58,7 +77,7 @@ class Client:
 
         artist_id = self.search(headers, artist, "artist")
 
-        print(artist_id)
+        # print(artist_id)
 
         # Use the artist's Spotify ID to get their top tracks
         response = requests.get(self.BASE_URL + 'artists/' + artist_id + '/top-tracks?country=US', headers=headers)
@@ -88,6 +107,11 @@ class Client:
 
 
     def get_song(self, song):
+        """
+        Retrives the song from the query.
+        Input: song = The song to look for.
+        Returns: An array containing the name of the song and its length in milliseconds.
+        """
 
         access_token = self.authenticate()
 
@@ -133,6 +157,11 @@ class Client:
     
 
     def analyze(self, song):
+        """
+        Returns an analysis of a song and its key information.
+        Input: song = The song to be analyzed.
+        Return: feature_list = The list of features, such as key, tempo, etc. that the song contains.'
+        """
         access_token = self.authenticate()
 
         headers = {
@@ -197,6 +226,11 @@ class Client:
             return None
         
     def get_artist_albums(self, artist):
+        """
+        Retrieve the albums of a given artist.
+        Input: artist = The artist to search for.
+        Return: album_names = The list of albums the artist has released.
+        """
         access_token = self.authenticate()
         headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
         artist_id = self.search(headers, artist, "artist")

@@ -32,6 +32,23 @@ class Tests:
         assert isinstance(access_token, str)
         assert len(access_token) > 0
 
+    def test_auth_no_id(self):
+        load_dotenv()
+        CLIENT_ID = ""
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        assert access_token == "Invalid ID"
+
+    def test_auth_no_secret(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  ""
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        assert access_token == "Invalid secret"
+
+
     
     def test_search_get_artist_id(self):
         load_dotenv()
