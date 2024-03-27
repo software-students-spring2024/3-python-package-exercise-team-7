@@ -1,4 +1,4 @@
-from pytify_stats.client import Client
+from client import Client
 import os
 from dotenv import load_dotenv
 
@@ -14,8 +14,6 @@ def main():
    print(artist_data)
    top_ten = spy.get_top_ten("J. Cole")
    print(top_ten)
-   album = spy.get_album("KOD")
-   print(album)
    track = spy.get_song("Wet Dreamz")
    print(track)
    analysis = spy.analyze("Hello Lionel")

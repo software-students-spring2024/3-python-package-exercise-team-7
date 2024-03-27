@@ -82,35 +82,35 @@ class Client:
         # print(retArray)
         return retStr
 
-    def get_album(self, album):
-        retArray = []
+    # def get_album(self, album):
+    #     retArray = []
 
-        access_token = self.authenticate()
+    #     access_token = self.authenticate()
 
-        headers = {
-        'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
+    #     headers = {
+    #     'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
 
-        album_id = self.search(headers, album, "album")
+    #     album_id = self.search(headers, album, "album")
 
-        # Use the album's Spotify ID to get more information
-        response = requests.get(self.BASE_URL + 'albums/' + album_id, headers=headers)
+    #     # Use the album's Spotify ID to get more information
+    #     response = requests.get(self.BASE_URL + 'albums/' + album_id, headers=headers)
 
-        # Error handling
-        if response.status_code != 200:
-            print(f"The album request was invalid, error:{response.status_code}")
-            return
+    #     # Error handling
+    #     if response.status_code != 200:
+    #         print(f"The album request was invalid, error:{response.status_code}")
+    #         return
 
-        # Convert the response to JSON
-        response_data = response.json()
+    #     # Convert the response to JSON
+    #     response_data = response.json()
 
-        # Print the names of the artist's top 10 tracks
-        for track in response_data['tracks']['items']:
-            retArray.append({'name' : track['name'], "milliseconds": track['duration_ms'], "id": track['duration_ms']})
-            #print(f"{i+1}. {track['name']}")
+    #     # Print the names of the artist's top 10 tracks
+    #     for track in response_data['tracks']['items']:
+    #         retArray.append({'name' : track['name'], "milliseconds": track['duration_ms'], "id": track['duration_ms']})
+    #         #print(f"{i+1}. {track['name']}")
 
-        # print(retArray)
-        return retArray
+    #     # print(retArray)
+    #     return retArray
 
     def get_song(self, song):
 
