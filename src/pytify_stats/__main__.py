@@ -1,4 +1,4 @@
-from pytify_stats.client import Client
+from client import Client
 import os
 from dotenv import load_dotenv
 
@@ -20,6 +20,8 @@ def main():
    print(track)
    analysis = spy.analyze("Hello Lionel")
    print(analysis)
+   artist_albums = spy.get_artist_albums("nonexist_artist_name_1234567")
+   print(artist_albums)
 
 
 if __name__ == "__main__":
