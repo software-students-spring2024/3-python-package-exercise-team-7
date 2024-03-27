@@ -17,7 +17,7 @@ Here is how to set it up:
 1. Run this code in the terminal:
 
 ```
-pipenv install -i https://test.pypi.org/simple/ pytify-stats==0.0.3.3
+pip install pytify-stats==0.0.9
 ```
 
 2. Import it in your python file:
@@ -38,18 +38,18 @@ from pytify_stats import client
 
 spy = client.Client(CLIENT_ID, CLIENT_SECRET)
 
-album = spy.get_album("KOD")
-
 top_ten = spy.get_top_ten("J. Cole")
 
 song = spy.get_song("She Knows")
 
-print(album)
+album = spy.get_artist_albums("J. cole")
+
 print(top_ten)
 print(song)
+print(album)
 ```
 
-Put your client_id and client secret you've recieved from Spotify in place of the parameters of the Client class
+Put your client_id and client_secret you've recieved from Spotify in place of the parameters of the Client class
 
 # How to Contribute
 
@@ -66,6 +66,10 @@ pipenv install pytest
 4. Push changes onto a new branch on GitHub
 
 5. Make a pull request and  wait for a review. If accpeted, the branches will be merged and the new code will be uploaded to PyPi
+
+# Pypi Package Link
+
+https://pypi.org/project/pytify-stats/0.0.9/
 
 
 # Contributors

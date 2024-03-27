@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
-from pytify_stats.client import Client
+from src.pytify_stats.client import Client
 
 class Tests:
 
@@ -131,7 +131,7 @@ class Tests:
 
         artist_name = "J. Cole"
         artist_data = spy.search_for_artist(artist_name)
-        assert artist_data is not None, "No artst data"
+        assert artist_data is not None, "No artist data"
         assert artist_data['name'] == artist_name, "Artist name is incorrect" 
     
     def test_result_format(self):

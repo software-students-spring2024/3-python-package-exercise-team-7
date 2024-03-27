@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pytify_stats"
 description = "A Python package that allows users to gather advanced artist statistics from Spotify"
-version = "0.0.3.4"
+version = "0.0.9"
 readme = "README.md"
 license = {file = "LICENSE"}
 
