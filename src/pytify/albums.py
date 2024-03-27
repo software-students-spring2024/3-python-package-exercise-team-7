@@ -29,7 +29,6 @@ def get_artist_albums(artist):
             if 'items' in response_data:
                 albums = [album for album in response_data['items'] if album.get('album_type') == 'album']
                 album_names = [album["name"] for album in albums]
-                print(album_names)
                 return album_names
                 
             else:
