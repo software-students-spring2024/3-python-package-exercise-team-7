@@ -1,4 +1,5 @@
 import requests
+from dotenv import load_dotenv
 
 class Client:
     # Spotify API endpoints
