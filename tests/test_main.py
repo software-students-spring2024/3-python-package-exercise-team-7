@@ -208,7 +208,16 @@ class Tests:
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
         topten = spy.get_top_ten("erjjroijejeoeoririj")
-        assert topten == f"The artist request was invalid, error:{self.response.status_code}"
+        assert topten == f"The artist request was invalid, error:400"
 
-    
-
+    def test_get_top_ten_no_search(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+        topten = spy.get_top_ten("")
+        assert topten == "Please enter an artist query."

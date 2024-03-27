@@ -42,7 +42,7 @@ class Client:
             artist_id = response_data[plural]['items'][0]['id']
             return artist_id
         else:
-            return None
+            return ""
 
         
     
@@ -60,6 +60,8 @@ class Client:
 
         artist_id = self.search(headers, artist, "artist")
 
+        print(artist_id)
+
         # Use the artist's Spotify ID to get their top tracks
         response = requests.get(self.BASE_URL + 'artists/' + artist_id + '/top-tracks?country=US', headers=headers)
 
@@ -67,7 +69,7 @@ class Client:
         if response.status_code != 200:
             return (f"The artist request was invalid, error:{response.status_code}")
             # return
-        elif self.artist == "":
+        elif artist == "":
             return "Please enter an artist query."
 
 
