@@ -144,29 +144,6 @@ class Client:
         else: song_id = response_data['tracks']['items'][0]['id']
         return song_id
     
-    # def analyze(self,song):
-    #     access_token = self.authenticate()
-
-    #     headers = {
-    #     'Authorization': 'Bearer {token}'.format(token=access_token)
-    #     }
-
-    #     song_id = self.search(headers, song, "track")
-    #     #print(song_id)
-    #     response = requests.get(self.BASE_URL + 'tracks/' + song_id, headers=headers)
-    #     response_data = response.json()
-    #     print(f"{response_data['name']} by {response_data['artists'][0]['name']}:")
-
-    #     #Use the song's Spotify ID to get their audio features
-    #     features_response = requests.get(self.BASE_URL + 'audio-features/' + song_id, headers=headers)
-    #     features_response_data = features_response.json()
-
-    #     feature_list = ""
-    #     for feature in features_response_data:
-    #         feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
-
-    #     # print(feature_list)
-    #     return feature_list
     
 
     def analyze(self, song):
@@ -201,3 +178,34 @@ class Client:
                 feature_list = feature_list + f"{feature}: {features_response_data[feature]}\n"
             # print(feature_list)
             return feature_list
+
+    def search_for_artist(self, artist_name):
+        """
+            Search for an artist by name.
+
+             Args:
+
+            -artist_name (str): the name of the artist to search for.
+
+            Returns:
+
+            -dict: About the artist.
+
+        """   
+
+
+        access_token = self.authenticate()
+
+        headers = {
+            'Authorization': 'Bearer {token}'.format(token=access_token)
+            }
+
+        response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
+
+        if response.status_code == 200:
+            artist_data = response.json()['artists']['items'][0]
+            return artist_data
+
+        else:
+            print("Failed to get artist's informstion: {response.status_code}")
+            return None
