@@ -144,22 +144,22 @@ class Client:
 
         return [response_data['name'],response_data['duration_ms']]
     
-    def get_track_id(self, song):
-        access_token = self.authenticate()
-        headers = {
-        'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
-        response = requests.get(self.BASE_URL + f'search?q=track:{str.lower(song)}&type=track',headers=headers)
-        response_data = response.json()
-        # print(response_data['tracks']['items'])
-        # Get the song's Spotify ID
-        if response_data['tracks']['items'] == []:
-            return "No such track ID found"
-        elif song == "":
-            # print("Please enter the name of a song.")
-            return "Please enter the name of a song."
-        else: song_id = response_data['tracks']['items'][0]['id']
-        return song_id
+    # def get_track_id(self, song):
+    #     access_token = self.authenticate()
+    #     headers = {
+    #     'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
+    #     response = requests.get(self.BASE_URL + f'search?q=track:{str.lower(song)}&type=track',headers=headers)
+    #     response_data = response.json()
+    #     # print(response_data['tracks']['items'])
+    #     # Get the song's Spotify ID
+    #     if response_data['tracks']['items'] == []:
+    #         return "No such track ID found"
+    #     elif song == "":
+    #         # print("Please enter the name of a song.")
+    #         return "Please enter the name of a song."
+    #     else: song_id = response_data['tracks']['items'][0]['id']
+    #     return song_id
     
     
 
@@ -224,7 +224,7 @@ class Client:
             return artist_data
 
         else:
-            print("Failed to get artist's informstion: {response.status_code}")
+            print(f"Failed to get artist's information: {response.status_code}")
             return None
         
     def get_artist_albums(self, artist):
