@@ -20,6 +20,7 @@ jobs:
           pipenv --python ${{ matrix.python-version }}
           pipenv install pytest
           pipenv install
+          pipenv install dotenv
       - name: Turn on 'editable' mode
         run: |
           pipenv install -e .
@@ -30,6 +31,7 @@ jobs:
         run: |
           echo $CLIENT_ID
           echo $CLIENT_SECRET
+      
       - name: Test with pytest
         run: |
           pipenv run python -m pytest
