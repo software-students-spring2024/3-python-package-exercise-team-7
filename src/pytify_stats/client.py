@@ -20,7 +20,7 @@ class Client:
         # Convert the response to JSON
         auth_response_data = auth_response.json()
 
-        print(auth_response_data)
+       
         #Save the access token
         access_token = auth_response_data['access_token']
 
@@ -33,10 +33,18 @@ class Client:
         # Convert the response to JSON
         response_data = response.json()
 
-        # Get the album's Spotify ID
-        album_id = response_data[keyword+"s"]['items'][0]['id']
+        # # Get the album's Spotify ID
+        # album_id = response_data[keyword+"s"]['items'][0]['id']
+        plural = keyword+"s"
 
-        return album_id
+        # Get the artist's Spotify ID
+        if plural in response_data and 'items' in response_data[plural] and response_data[plural]['items']:
+            artist_id = response_data[plural]['items'][0]['id']
+            return artist_id
+        else:
+            return None
+
+        
     
     
 
@@ -209,3 +217,27 @@ class Client:
         else:
             print("Failed to get artist's informstion: {response.status_code}")
             return None
+        
+    def get_artist_albums(self, artist):
+        access_token = self.authenticate()
+        headers = {'Authorization': 'Bearer {token}'.format(token=access_token)}
+        artist_id = self.search(headers, artist, "artist")
+        if artist_id:
+            response = requests.get(self.BASE_URL + 'artists/' + artist_id + '/albums', headers=headers)
+            if response.status_code == 200:
+                response_data = response.json()
+                
+                if 'items' in response_data:
+                    albums = [album for album in response_data['items'] if album.get('album_type') == 'album']
+                    album_names = [album["name"] for album in albums]
+                    return album_names
+                    
+                else:
+                    print("No albums found for the artist.")
+                    return []
+            else:
+                print(f"Failed to fetch albums for artist {artist_id}. Status code: {response.status_code}")
+                return []
+        else:
+            print(f"No artist found with name '{artist}'")
+            return []

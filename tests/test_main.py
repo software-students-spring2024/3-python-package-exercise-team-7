@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
-from pytify_stats.client import Client
+from src.pytify_stats.client import Client
 
 class Tests:
 
@@ -133,3 +133,55 @@ class Tests:
         artist_data = spy.search_for_artist(artist_name)
         assert artist_data is not None, "No artst data"
         assert artist_data['name'] == artist_name, "Artist name is incorrect" 
+    
+    def test_result_format(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+
+        artist = "wallows" 
+        albums = spy.get_artist_albums(artist)
+
+        # Check if the function returns a list
+        assert isinstance(albums, list)
+
+        if not albums:
+            # if no albums, return empty list
+            assert albums == []
+            print("No albums found for the artist.")
+        else:
+            # else check the format of albums
+            for album in albums:
+                assert isinstance(album, str)
+                assert len(album) > 0
+
+    def test_correct_info(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+
+        # Call a successful response with albums
+        artist = 'wallows'
+
+        # Call the function
+        albums = spy.get_artist_albums(artist)
+
+        # Check with correct information
+        assert albums == ['Tell Me That It’s Over', 'Nothing Happens']
+    
+    def test_invalid_artist(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+
+        # Call a response with no artists found
+        artist = 'nonexist_artist_name_1234567'
+        
+        # Call the function
+        albums = spy.get_artist_albums(artist)
+        
+        # Check if album list is empty
+        assert albums == []
