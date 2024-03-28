@@ -63,19 +63,19 @@ class Client:
             return ""
 
     
-    def get_artist_id(self, artist):
-        headers = {
-            'Authorization': 'Bearer {token}'.format(token=self.token)
-        }
+    # def get_artist_id(self, artist):
+    #     headers = {
+    #         'Authorization': 'Bearer {token}'.format(token=self.token)
+    #     }
 
-        response = requests.get(self.BASE_URL + f'search?q=artist:{str.lower(artist)}&type=artist', headers=headers)
+    #     response = requests.get(self.BASE_URL + f'search?q=artist:{str.lower(artist)}&type=artist', headers=headers)
 
-        response_data = response.json()
+    #     response_data = response.json()
         
-        # Get the artist's Spotify ID
-        artist_id = response_data['artists']['items'][0]['id']
+    #     # Get the artist's Spotify ID
+    #     artist_id = response_data['artists']['items'][0]['id']
 
-        return artist_id
+    #     return artist_id
 
     def search_for_artist(self, artist_name):
         """
