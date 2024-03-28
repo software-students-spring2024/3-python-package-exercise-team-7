@@ -18,9 +18,12 @@ class Client:
         self.token = self.authenticate()
 
     def authenticate(self):
-        if(self.CLIENT_ID == ""):
+
+        if(self.CLIENT_ID != os.getenv("CLIENT_ID")):
+            # print("true")
             return "Invalid ID"
-        if(self.CLIENT_SECRET == ""):
+        if(self.CLIENT_SECRET != os.getenv("CLIENT_SECRET")):
+            # print("true")
             return "Invalid secret"
         auth_string = self.CLIENT_ID + ":" + self.CLIENT_SECRET
         auth_bytes = auth_string.encode("utf-8")
@@ -31,11 +34,15 @@ class Client:
             "Authorization": "Basic " + auth_base64,
             "Content-Type": "application/x-www-form-urlencoded"
         }
+
+
     
         data = {"grant_type": "client_credentials"}
         result = post(url, headers=headers, data=data)
         json_result = json.loads(result.content)
         token = json_result["access_token"]
+
+        
         
         return token
 
