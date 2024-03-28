@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 from dotenv import load_dotenv
-from pytify.client import get_artist_id, authenticate
+from pytify.client import Client
 
 
 
@@ -28,20 +28,37 @@ class Tests:
 
 
     def test_get_spofify_auth(self):
-        access_token = authenticate()
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
         assert isinstance(access_token, str)
 
     
     def test_get_artist_id(self):
-        access_token = authenticate()
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
 
+        artist_id = spy.get_artist_id("J Cole")
+
+        assert isinstance(artist_id, str)
+        
+    def test_search_get_artist_id(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
         headers = {
         'Authorization': 'Bearer {token}'.format(token=access_token)
         }
-
-        artist_id = get_artist_id(headers, "J Cole")
-
+        artist_id = spy.get_artist_id("J Cole")
         assert isinstance(artist_id, str)
+
 
         
     
