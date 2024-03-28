@@ -2,11 +2,16 @@ name: CI / CD
 on: [push]
 jobs:
   build:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
+    env:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
     timeout-minutes: 5
     strategy:
       matrix:
-        python-version: ["3.7", "3.9", "3.11"]
+        python-version: ["3.9", "3.11"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -20,18 +25,9 @@ jobs:
           pipenv --python ${{ matrix.python-version }}
           pipenv install pytest
           pipenv install
-          pipenv install dotenv
       - name: Turn on 'editable' mode
         run: |
           pipenv install -e .
-      - name: Use Secrets
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        run: |
-          echo $CLIENT_ID
-          echo $CLIENT_SECRET
-      
       - name: Test with pytest
         run: |
           pipenv run python -m pytest
@@ -51,8 +47,4 @@ jobs:
         run: |
           pipenv install build
           pipenv run python -m build .
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+      

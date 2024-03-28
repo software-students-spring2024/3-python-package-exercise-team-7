@@ -4,14 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+python-dotenv = "*"
 requests = "*"
+spotipy = "*"
+pytest = "*"
+pytify_stats = {file = ".", editable = true}
+build = "*"
+
 
 [dev-packages]
-python-dotenv = "*"
 pytest = "*"
-twine = "*"
 build = "*"
-setuptools = "*"
+twine = "*"
 
 [requires]
 python_version = "3"
