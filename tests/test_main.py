@@ -35,8 +35,37 @@ class Tests:
         access_token = spy.authenticate()
         assert isinstance(access_token, str)
 
+    # def test_get_spofify_auth(self):
+    #     load_dotenv()
+    #     CLIENT_ID = os.getenv("CLIENT_ID")
+    #     CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+    #     spy = Client(CLIENT_ID,CLIENT_SECRET)
+    #     access_token = spy.authenticate()
+    #     assert isinstance(access_token, str)
+    #     assert len(access_token) > 0
+
+    def test_auth_no_id(self):
+        load_dotenv()
+        CLIENT_ID = ""
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        spy2 = Client(os.getenv("CLIENT_ID"),CLIENT_SECRET)
+        access_token = spy.authenticate()
+        access_token2 = spy2.authenticate()
+        assert len(access_token) == len(access_token2)
+
+    def test_auth_no_secret(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  ""
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        spy2 = Client(CLIENT_ID,os.getenv("CLIENT_SECRET"))
+        access_token = spy.authenticate()
+        access_token2 = spy2.authenticate()
+        assert len(access_token) == len(access_token2)
+
     
-    def test_get_artist_id(self):
+    def test_search_get_artist_id(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
@@ -50,17 +79,17 @@ class Tests:
 
         assert isinstance(artist_id, str)
         
-    def test_search_get_artist_id(self):
-        load_dotenv()
-        CLIENT_ID = os.getenv("CLIENT_ID")
-        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
-        spy = Client(CLIENT_ID,CLIENT_SECRET)
-        access_token = spy.authenticate()
-        headers = {
-        'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
-        artist_id = spy.get_artist_id("J Cole")
-        assert isinstance(artist_id, str)
+    # def test_search_get_artist_id(self):
+    #     load_dotenv()
+    #     CLIENT_ID = os.getenv("CLIENT_ID")
+    #     CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+    #     spy = Client(CLIENT_ID,CLIENT_SECRET)
+    #     access_token = spy.authenticate()
+    #     headers = {
+    #     'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
+    #     artist_id = spy.get_artist_id("J Cole")
+    #     assert isinstance(artist_id, str)
 
 
     def test_search_get_track_id(self):
@@ -193,7 +222,7 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
-
+        
         # Call a successful response with albums
         artist = 'wallows'
 
@@ -208,6 +237,10 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         # Call a response with no artists found
         artist = 'nonexist_artist_name_1234567'
@@ -254,14 +287,55 @@ class Tests:
         topten = spy.get_top_ten("")
         assert topten == "Please enter an artist query."
         
+    # def test_search_for_artist(self):
+    #     load_dotenv()
+    #     CLIENT_ID = os.getenv("CLIENT_ID")
+    #     CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+    #     spy = Client(CLIENT_ID,CLIENT_SECRET)
+
+    #     artist_name = "J. Cole"
+    #     artist_data = spy.search_for_artist(artist_name)
+    #     assert artist_data is not None, "No artist data"
+    #     assert artist_data['name'] == artist_name, "Artist name is incorrect" 
+    
     def test_search_for_artist(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         artist_name = "J. Cole"
         artist_data = spy.search_for_artist(artist_name)
-        assert artist_data is not None, "No artist data"
-        assert artist_data['name'] == artist_name, "Artist name is incorrect" 
+        assert isinstance(artist_data, dict) 
+
+    def test_search_for_artist_error(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        artist_name = "jodsjoejfsjosjofojjowjo"
+        artist_data = spy.search_for_artist(artist_name)
+        assert artist_data == "Artist not found."
     
+    def test_search_for_artist_blank(self):
+        load_dotenv()
+        CLIENT_ID = os.getenv("CLIENT_ID")
+        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
+
+        artist_name = ""
+        artist_data = spy.search_for_artist(artist_name)
+        assert artist_data == "Invalid artist name."

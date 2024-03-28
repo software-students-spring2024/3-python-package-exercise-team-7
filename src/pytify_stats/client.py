@@ -18,6 +18,17 @@ class Client:
         self.token = self.authenticate()
 
     def authenticate(self):
+        """
+        Authenticates the Spotify user to be able to use this package.
+        Return: access_token = Token that allows you to access the Spotify data.
+        """
+
+        # if(self.CLIENT_ID != os.getenv("CLIENT_ID")):
+        #     # print("true")
+        #     return "Invalid ID"
+        # if(self.CLIENT_SECRET != os.getenv("CLIENT_SECRET")):
+        #     # print("true")
+        #     return "Invalid secret"
         auth_string = self.CLIENT_ID + ":" + self.CLIENT_SECRET
         auth_bytes = auth_string.encode("utf-8")
         auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
@@ -27,11 +38,16 @@ class Client:
             "Authorization": "Basic " + auth_base64,
             "Content-Type": "application/x-www-form-urlencoded"
         }
+
+
     
         data = {"grant_type": "client_credentials"}
         result = post(url, headers=headers, data=data)
         json_result = json.loads(result.content)
         token = json_result["access_token"]
+
+        
+        
         return token
 
     def search(self, headers,name,keyword):
@@ -58,44 +74,44 @@ class Client:
             return ""
 
     
-    def get_artist_id(self, artist):
-        headers = {
-            'Authorization': 'Bearer {token}'.format(token=self.token)
-        }
+    # def get_artist_id(self, artist):
+    #     headers = {
+    #         'Authorization': 'Bearer {token}'.format(token=self.token)
+    #     }
 
-        response = requests.get(self.BASE_URL + f'search?q=artist:{str.lower(artist)}&type=artist', headers=headers)
+    #     response = requests.get(self.BASE_URL + f'search?q=artist:{str.lower(artist)}&type=artist', headers=headers)
 
-        response_data = response.json()
+    #     response_data = response.json()
         
-        # Get the artist's Spotify ID
-        artist_id = response_data['artists']['items'][0]['id']
+    #     # Get the artist's Spotify ID
+    #     artist_id = response_data['artists']['items'][0]['id']
 
-        return artist_id
+    #     return artist_id
 
-    def search_for_artist(self, artist_name):
-        """
-        Search for an artist by name.
+    # def search_for_artist(self, artist_name):
+    #     """
+    #     Search for an artist by name.
 
-        Args:
-            - artist_name (str): the name of the artist to search for.
+    #     Args:
+    #         - artist_name (str): the name of the artist to search for.
 
-        Returns:
-            - dict: About the artist.
-        """  
-        access_token = self.authenticate()
+    #     Returns:
+    #         - dict: About the artist.
+    #     """  
+    #     access_token = self.authenticate()
 
-        headers = {
-            'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
+    #     headers = {
+    #         'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
 
-        response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
+    #     response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
 
-        if response.status_code == 200:
-            artist_data = response.json()['artists']['items'][0]
-            return artist_data
-        else:
-            print(f"Failed to get artist's information: {response.status_code}")
-            return None
+    #     if response.status_code == 200:
+    #         artist_data = response.json()['artists']['items'][0]
+    #         return artist_data
+    #     else:
+    #         print(f"Failed to get artist's information: {response.status_code}")
+    #         return None
 
     def get_top_ten(self, artist):
         """
@@ -254,6 +270,12 @@ class Client:
 
         response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
 
+        if artist_name == "":
+            return "Invalid artist name."
+        # print(response.json()['artists']['items'])
+        if response.json()['artists']['items'] == []:
+            return "Artist not found."
+        
         if response.status_code == 200:
             artist_data = response.json()['artists']['items'][0]
             return artist_data
@@ -261,6 +283,9 @@ class Client:
         else:
             print(f"Failed to get artist's information: {response.status_code}")
             return None
+        
+
+    
         
     def get_artist_albums(self, artist):
         """
