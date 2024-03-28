@@ -193,7 +193,7 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
-
+        
         # Call a successful response with albums
         artist = 'wallows'
 
@@ -208,6 +208,10 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         # Call a response with no artists found
         artist = 'nonexist_artist_name_1234567'
@@ -270,6 +274,10 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         artist_name = "J. Cole"
         artist_data = spy.search_for_artist(artist_name)
@@ -280,6 +288,10 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         artist_name = "jodsjoejfsjosjofojjowjo"
         artist_data = spy.search_for_artist(artist_name)
@@ -290,6 +302,10 @@ class Tests:
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
         spy = Client(CLIENT_ID,CLIENT_SECRET)
+        access_token = spy.authenticate()
+        headers = {
+        'Authorization': 'Bearer {token}'.format(token=access_token)
+        }
 
         artist_name = ""
         artist_data = spy.search_for_artist(artist_name)
