@@ -18,6 +18,10 @@ class Client:
         self.token = self.authenticate()
 
     def authenticate(self):
+        """
+        Authenticates the Spotify user to be able to use this package.
+        Return: access_token = Token that allows you to access the Spotify data.
+        """
 
         # if(self.CLIENT_ID != os.getenv("CLIENT_ID")):
         #     # print("true")
