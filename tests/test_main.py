@@ -50,17 +50,17 @@ class Tests:
 
         assert isinstance(artist_id, str)
         
-    def test_search_get_artist_id(self):
-        load_dotenv()
-        CLIENT_ID = os.getenv("CLIENT_ID")
-        CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
-        spy = Client(CLIENT_ID,CLIENT_SECRET)
-        access_token = spy.authenticate()
-        headers = {
-        'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
-        artist_id = spy.get_artist_id("J Cole")
-        assert isinstance(artist_id, str)
+    # def test_search_get_artist_id(self):
+    #     load_dotenv()
+    #     CLIENT_ID = os.getenv("CLIENT_ID")
+    #     CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
+    #     spy = Client(CLIENT_ID,CLIENT_SECRET)
+    #     access_token = spy.authenticate()
+    #     headers = {
+    #     'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
+    #     artist_id = spy.get_artist_id("J Cole")
+    #     assert isinstance(artist_id, str)
 
 
     def test_search_get_track_id(self):
@@ -264,4 +264,5 @@ class Tests:
         artist_data = spy.search_for_artist(artist_name)
         assert artist_data is not None, "No artist data"
         assert artist_data['name'] == artist_name, "Artist name is incorrect" 
+    
     
