@@ -40,8 +40,8 @@ jobs:
           pipenv install pytz
           pipenv install python-dateutil
           pipenv install build
-          pipenv install requests
-          pipenv install python-dotenv
+          pip install requests
+          pip install python-dotenv
           pipenv install gitcommitlogger
       - name: Log pull request opened
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
