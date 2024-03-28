@@ -6,10 +6,6 @@ jobs:
     env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          
-    run: |
-          echo $CLIENT_ID
-          echo $CLIENT_SECRET
     timeout-minutes: 5
     strategy:
       matrix:
