@@ -6,6 +6,7 @@ from requests import post
 import json
 
 
+#added some comments
 
 class Client:
     AUTH_URL = "https://accounts.spotify.com/api/token"
