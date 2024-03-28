@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
     timeout-minutes: 5
     strategy:
       matrix:
@@ -23,13 +26,6 @@ jobs:
       - name: Turn on 'editable' mode
         run: |
           pipenv install -e .
-      - name: Use Secrets
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-        run: |
-          echo $CLIENT_ID
-          echo $CLIENT_SECRET
       - name: Test with pytest
         run: |
           pipenv run python -m pytest
