@@ -64,4 +64,4 @@ jobs:
           pipenv run gitcommitlogger -r $(echo $REPOSITORY_URL) -t $(echo $EVENT_TYPE) -i commits.json -o commit_stats.csv -u $(echo $COMMIT_LOG_API) -v
       - name: Run Unit Tests
         run: |
-          python -m pytest
+          pipenv run pytest
