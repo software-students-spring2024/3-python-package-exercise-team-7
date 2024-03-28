@@ -18,6 +18,10 @@ class Client:
         self.token = self.authenticate()
 
     def authenticate(self):
+        if(self.CLIENT_ID == ""):
+            return "Invalid ID"
+        if(self.CLIENT_SECRET == ""):
+            return "Invalid secret"
         auth_string = self.CLIENT_ID + ":" + self.CLIENT_SECRET
         auth_bytes = auth_string.encode("utf-8")
         auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
@@ -32,6 +36,7 @@ class Client:
         result = post(url, headers=headers, data=data)
         json_result = json.loads(result.content)
         token = json_result["access_token"]
+        
         return token
 
     def search(self, headers,name,keyword):
