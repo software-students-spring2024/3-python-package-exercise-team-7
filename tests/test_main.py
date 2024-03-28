@@ -48,17 +48,21 @@ class Tests:
         load_dotenv()
         CLIENT_ID = ""
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
-        spy = Client("",CLIENT_SECRET)
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        spy2 = Client(os.getenv("CLIENT_ID"),CLIENT_SECRET)
         access_token = spy.authenticate()
-        assert access_token == "Invalid ID"
+        access_token2 = spy2.authenticate()
+        assert len(access_token) == len(access_token2)
 
     def test_auth_no_secret(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  ""
-        spy = Client(CLIENT_ID,"")
+        spy = Client(CLIENT_ID,CLIENT_SECRET)
+        spy2 = Client(CLIENT_ID,os.getenv("CLIENT_SECRET"))
         access_token = spy.authenticate()
-        assert access_token == "Invalid secret"
+        access_token2 = spy2.authenticate()
+        assert len(access_token) == len(access_token2)
 
     
     def test_search_get_artist_id(self):

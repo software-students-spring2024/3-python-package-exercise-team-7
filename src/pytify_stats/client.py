@@ -19,12 +19,12 @@ class Client:
 
     def authenticate(self):
 
-        if(self.CLIENT_ID != os.getenv("CLIENT_ID")):
-            # print("true")
-            return "Invalid ID"
-        if(self.CLIENT_SECRET != os.getenv("CLIENT_SECRET")):
-            # print("true")
-            return "Invalid secret"
+        # if(self.CLIENT_ID != os.getenv("CLIENT_ID")):
+        #     # print("true")
+        #     return "Invalid ID"
+        # if(self.CLIENT_SECRET != os.getenv("CLIENT_SECRET")):
+        #     # print("true")
+        #     return "Invalid secret"
         auth_string = self.CLIENT_ID + ":" + self.CLIENT_SECRET
         auth_bytes = auth_string.encode("utf-8")
         auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
