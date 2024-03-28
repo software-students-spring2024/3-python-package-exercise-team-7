@@ -1,4 +1,4 @@
-from pytify_stats.client import Client
+from pytify.client import Client
 import os
 from dotenv import load_dotenv
 
