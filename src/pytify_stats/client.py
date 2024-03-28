@@ -77,30 +77,30 @@ class Client:
 
     #     return artist_id
 
-    def search_for_artist(self, artist_name):
-        """
-        Search for an artist by name.
+    # def search_for_artist(self, artist_name):
+    #     """
+    #     Search for an artist by name.
 
-        Args:
-            - artist_name (str): the name of the artist to search for.
+    #     Args:
+    #         - artist_name (str): the name of the artist to search for.
 
-        Returns:
-            - dict: About the artist.
-        """  
-        access_token = self.authenticate()
+    #     Returns:
+    #         - dict: About the artist.
+    #     """  
+    #     access_token = self.authenticate()
 
-        headers = {
-            'Authorization': 'Bearer {token}'.format(token=access_token)
-        }
+    #     headers = {
+    #         'Authorization': 'Bearer {token}'.format(token=access_token)
+    #     }
 
-        response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
+    #     response = requests.get(self.BASE_URL + 'search?q=' + artist_name + '&type=artist', headers=headers)
 
-        if response.status_code == 200:
-            artist_data = response.json()['artists']['items'][0]
-            return artist_data
-        else:
-            print(f"Failed to get artist's information: {response.status_code}")
-            return None
+    #     if response.status_code == 200:
+    #         artist_data = response.json()['artists']['items'][0]
+    #         return artist_data
+    #     else:
+    #         print(f"Failed to get artist's information: {response.status_code}")
+    #         return None
 
     def get_top_ten(self, artist):
         """

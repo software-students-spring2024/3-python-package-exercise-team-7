@@ -36,7 +36,7 @@ class Tests:
         assert isinstance(access_token, str)
 
     
-    def test_get_artist_id(self):
+    def test_search_get_artist_id(self):
         load_dotenv()
         CLIENT_ID = os.getenv("CLIENT_ID")
         CLIENT_SECRET =  os.getenv("CLIENT_SECRET")
