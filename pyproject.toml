@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pytify"
+name = "pytify_stats"
 description = "An example of a package developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
 version = "0.0.9"
 authors = [
@@ -29,4 +29,4 @@ dev = ["pytest"]
 
 
 [project.scripts]
-pytify = "pytify.__main__:main"
+pytify_stats = "pytify_stats.__main__:main"
