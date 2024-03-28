@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "*"
+pytify_stats = {file = ".", editable = true}
 
 [dev-packages]
 python-dotenv = "*"
