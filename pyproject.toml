@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytify_stats"
-description = "An example of a package developed with pyenv, built with build using setuptools, uploaded to PyPI using twine, and distributed via pip."
+description = "A Python package that allows users to gather advanced artist statistics from Spotify"
 version = "0.0.9"
 authors = [
   { name="Rak Sridhar", email="rss9243@nyu.edu" },
